@@ -1,0 +1,73 @@
+.topbar {
+  background: var(--color-accent);
+  color: var(--color-dark);
+  font-size: 0.8125rem;
+}
+
+.topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 24px;
+  min-height: 40px;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.topbar__motto {
+  font-weight: 600;
+}
+
+.topbar__since {
+  opacity: 0.85;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.topbar__email {
+  font-weight: 500;
+}
+
+.topbar__email:hover {
+  opacity: 0.85;
+}
+
+.topbar__callback {
+  background: transparent;
+  border: 1px solid rgba(26, 42, 58, 0.35);
+  color: var(--color-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.topbar__callback:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: var(--color-dark);
+}
+
+@media (max-width: 640px) {
+  .topbar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 16px;
+  }
+
+  .topbar__email span {
+    display: none;
+  }
+}
