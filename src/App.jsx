@@ -14,9 +14,11 @@ function PageFallback() {
   return <div className="route-loading" aria-live="polite" aria-busy="true" />
 }
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={routerBasename}>
       <ScrollToHashCenter />
       <Suspense fallback={<PageFallback />}>
         <Routes>

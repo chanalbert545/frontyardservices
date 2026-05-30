@@ -8,7 +8,7 @@ export const company = {
   phones: ['+256 701 855 099', '+256 762 989 854'],
   address: 'Martyrs Mall, Kyaliwajjala, Uganda',
   hours: 'Monday – Saturday, business hours',
-  profilePdf: '/Frontyard%20Services%20Profile%202026%20(3).pdf',
+  profilePdf: `${import.meta.env.BASE_URL}Frontyard%20Services%20Profile%202026%20(3).pdf`,
 }
 
 export const navLinks = [
