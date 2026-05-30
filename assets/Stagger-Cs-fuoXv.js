@@ -1,0 +1,1 @@
+import{r as a,j as n}from"./vendor-react-Da9s6szu.js";import{u as m}from"./index-BtapP027.js";function l({children:t,className:e="",step:r=90,as:o="div"}){const s=a.useRef(null),i=m(s,{threshold:.08});return n.jsx(o,{ref:s,className:`motion-stagger ${i?"motion-stagger--visible":""} ${e}`.trim(),style:{"--stagger-step":`${r}ms`},children:t})}export{l as S};
