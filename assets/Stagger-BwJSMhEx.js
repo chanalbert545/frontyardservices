@@ -1,0 +1,1 @@
+import{b as a,j as n}from"./vendor-react-BUbK1zrI.js";import{u as m}from"./index-CjbOXcr8.js";function l({children:t,className:e="",step:r=90,as:o="div"}){const s=a.useRef(null),i=m(s,{threshold:.08});return n.jsx(o,{ref:s,className:`motion-stagger ${i?"motion-stagger--visible":""} ${e}`.trim(),style:{"--stagger-step":`${r}ms`},children:t})}export{l as S};

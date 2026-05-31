@@ -1,4 +1,4 @@
-import{r as i}from"./vendor-react-Da9s6szu.js";/**
+import{b as i}from"./vendor-react-BUbK1zrI.js";/**
  * react-router v7.16.0
  *
  * Copyright (c) Remix Software Inc.
