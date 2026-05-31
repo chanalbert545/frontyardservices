@@ -1,12 +1,64 @@
 import { useState } from 'react'
-import { quoteOptions } from '../data/siteData'
+import ConfirmModal from './ConfirmModal'
+import { submitWeb3Form } from '../utils/web3forms'
+import { quoteOptions, company } from '../data/siteData'
 
 export default function QuoteForm({ id = 'quote-form' }) {
   const [submitted, setSubmitted] = useState(false)
+  const [pendingQuote, setPendingQuote] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submissionError, setSubmissionError] = useState('')
 
   function handleSubmit(e) {
     e.preventDefault()
-    setSubmitted(true)
+    const formData = new FormData(e.target)
+    const name = formData.get('name')?.toString().trim() ?? ''
+    const companyName = formData.get('company')?.toString().trim() ?? ''
+    const email = formData.get('email')?.toString().trim() ?? ''
+    const phone = formData.get('phone')?.toString().trim() ?? ''
+    const requirements = formData.get('requirements')?.toString().trim() ?? ''
+    const message = formData.get('message')?.toString().trim() ?? ''
+
+    setPendingQuote({ name, companyName, email, phone, requirements, message })
+  }
+
+  async function handleConfirmQuote() {
+    if (!pendingQuote) return
+
+    setIsSubmitting(true)
+    setSubmissionError('')
+
+    const { name, companyName, email, phone, requirements, message } = pendingQuote
+    const body = [
+      `Name: ${name}`,
+      `Company: ${companyName}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      `Requirements: ${requirements}`,
+      '',
+      'Additional Details:',
+      message,
+    ].join('\n')
+
+    try {
+      await submitWeb3Form({
+        name,
+        email,
+        subject: `[Quotation Request] ${name}`,
+        message: body,
+        data: { company: companyName, phone, requirements, form_type: 'quotation' },
+      })
+      setPendingQuote(null)
+      setSubmitted(true)
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : 'Failed to submit. Please try again later.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  function handleCancelQuote() {
+    setPendingQuote(null)
   }
 
   if (submitted) {
@@ -67,7 +119,18 @@ export default function QuoteForm({ id = 'quote-form' }) {
           Receive Free Quotation
         </button>
         <p className="form-note">By using this form you agree to our privacy policy.</p>
+        {submissionError && <p className="form-note form-note--error">{submissionError}</p>}
       </form>
+      <ConfirmModal
+        isOpen={Boolean(pendingQuote)}
+        title="Confirm send quotation request"
+        message={`You are about to send this quotation request to ${company.email} using Web3Forms. Continue?`}
+        onConfirm={handleConfirmQuote}
+        onCancel={handleCancelQuote}
+        confirmText="Send Request"
+        cancelText="Cancel"
+        isSubmitting={isSubmitting}
+      />
     </div>
   )
 }

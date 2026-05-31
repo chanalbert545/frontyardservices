@@ -296,10 +296,6 @@ textarea {
   margin-top: 12px;
 }
 
-.form-note--error {
-  color: var(--color-danger, #c0392b);
-}
-
 .quote-form__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

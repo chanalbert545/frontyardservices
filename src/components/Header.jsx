@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { company, navLinks, serviceDropdown } from '../data/siteData'
 import { brandLogoImg } from '../data/images/core'
@@ -15,12 +15,17 @@ export default function Header({ onRequestCallback }) {
     if (dropdownThumbs) return
     import('../data/images/services').then((mod) => {
       setDropdownThumbs({
+        '/services#facility-services': mod.serviceImages['facility-services'],
         '/services#commercial-cleaning': mod.serviceImages['commercial-cleaning'],
         '/services#pest-control': mod.serviceImages['pest-control'],
         '/services#grounds-maintenance': mod.serviceImages['grounds-maintenance'],
       })
     })
   }, [dropdownThumbs])
+
+  useEffect(() => {
+    loadServiceThumbs()
+  }, [])
 
   function handleServicesEnter() {
     setServicesOpen(true)

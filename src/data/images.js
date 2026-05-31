@@ -16,7 +16,7 @@ import gallery3 from '../assets/IMG/IMG_1817.webp'
 import gallery4 from '../assets/IMG/IMG_5597.webp'
 import gallery5 from '../assets/IMG/IMG_5630.webp'
 import gallery6 from '../assets/IMG/IMG_7224.webp'
-import gallery7 from '../assets/IMG/IMG_1962.webp'
+import gallery7 from '../assets/IMG/IMG_2045.webp'
 import gallery8 from '../assets/IMG/IMG_1825.webp'
 import gallery9 from '../assets/IMG/IMG_5693.webp'
 
@@ -25,7 +25,7 @@ import gallery9 from '../assets/IMG/IMG_5693.webp'
 // Edit the import path on each line. The `id` must match siteData.js → partners[].
 // -----------------------------------------------------------------------------
 import partnerCafeDamour from '../assets/IMG/IMG_2028.webp'
-import partnerKiraMotors from '../assets/IMG/IMG_5552.webp'
+import partnerKiraMotors from '../assets/IMG/w (7).webp'
 import partnerCorporateOffices from '../assets/IMG/IMG_2045.webp'
 import partnerPride from '../assets/pride.png'
 import partnerStoneridgeSchool from '../assets/stone.png'

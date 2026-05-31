@@ -4,11 +4,11 @@ export const company = {
   tagline: 'Give it a new look',
   motto: 'Quality that cares',
   since: 2010,
-  email: 'frontyardservices2012@gmail.com',
-  phones: ['+256 701 855 099', '+256 762 989 854'],
+  email: 'info@frontyardservices.org',
+  phones: ['+256 750 081 038', '+256 762 989 854'],
   address: 'Martyrs Mall, Kyaliwajjala, Uganda',
   hours: 'Monday – Saturday, business hours',
-  profilePdf: `${import.meta.env.BASE_URL}Frontyard%20Services%20Profile%202026%20(3).pdf`,
+  profilePdf: `${import.meta.env.BASE_URL}Frontyard Services Profile 2026 (3) (1).pdf`,
 }
 
 export const navLinks = [
@@ -21,6 +21,7 @@ export const navLinks = [
 
 export const serviceDropdown = [
   { label: 'Commercial & Industrial Cleaning', href: '/services#commercial-cleaning' },
+  { label: 'Integrated Facility & Property Services', href: '/services#facility-services' },
   { label: 'Pest Control & Fumigation', href: '/services#pest-control' },
   { label: 'Grounds & Facility Maintenance', href: '/services#grounds-maintenance' },
 ]
@@ -32,6 +33,7 @@ export const heroServices = [
   'Hospitals & Healthcare',
   'Warehouses & Industrial',
   'Deep Cleaning',
+  'Facility & Property Management',
 ]
 
 export const story = {
@@ -88,10 +90,6 @@ export const leadership = {
     'Our growth is steered by leadership that balances clinical precision with robust business strategy.',
   points: [
     {
-      title: 'Pharmaceutical Care & Governance',
-      text: 'Our Managing Director is a qualified Clinical Pharmacist with broad knowledge of pharmacy management. Her expertise ensures that every branch adheres to the highest global standards of practice, staff management, and safety.',
-    },
-    {
       title: 'Strategic Leadership',
       text: 'Our Managing Director holds a BSc in Accounting and Finance, an MSc in International Trade Law and Trade Policy, and a Certificate in Project Planning and Management — bringing financial discipline, contractual integrity, and structured project execution to every client engagement.',
     },
@@ -134,6 +132,22 @@ export const services = [
     ],
   },
   {
+    id: 'facility-services',
+    title: 'Integrated Facility & Property Services',
+    description:
+      'End-to-end facility and property services for homes, corporate offices, schools and universities, hospitals and clinics, warehouses, factories, retail and hospitality venues, and property management portfolios across Uganda.',
+    features: [
+      'Bespoke facility management plans for mixed portfolios',
+      'Residential cleaning and caretaking services',
+      'Daily and contract office cleaning for corporate clients',
+      'Institutional cleaning for schools and universities',
+      'Healthcare-grade sanitisation for hospitals and clinics',
+      'Industrial cleaning and warehouse maintenance',
+      'Retail and hospitality front-of-house and back-of-house care',
+      'Co-ordinated property management support and scheduled maintenance',
+    ],
+  },
+  {
     id: 'pest-control',
     title: 'Pest Control & Fumigation',
     description:
@@ -152,7 +166,7 @@ export const services = [
     description:
       'We design, maintain, and beautify grounds and exterior areas to reflect the professionalism of what\'s inside your building.',
     features: [
-      'Landscape and grounds upkeep',
+      'Compound  and paver washing',
       'Exterior cleaning and facade care',
       'Waste area and perimeter maintenance',
       'Seasonal planting and lawn care',

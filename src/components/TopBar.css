@@ -60,14 +60,17 @@
   border-color: var(--color-dark);
 }
 
+@media (max-width: 768px) {
+  .topbar__email,
+  .topbar__callback {
+    display: none !important;
+  }
+}
+
 @media (max-width: 640px) {
   .topbar__inner {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px 16px;
-  }
-
-  .topbar__email span {
-    display: none;
   }
 }

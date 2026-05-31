@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import ScrollToHashCenter from './components/ScrollToHashCenter'
+import ScrollToTop from './components/ScrollToTop'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ServicesPage = lazy(() => import('./pages/ServicesPage'))
@@ -19,6 +20,7 @@ const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
 export default function App() {
   return (
     <BrowserRouter basename={routerBasename}>
+      <ScrollToTop />
       <ScrollToHashCenter />
       <Suspense fallback={<PageFallback />}>
         <Routes>

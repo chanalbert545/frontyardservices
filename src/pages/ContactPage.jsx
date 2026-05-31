@@ -3,6 +3,8 @@ import { useOutletContext } from 'react-router-dom'
 import PageHero from '../components/PageHero'
 import QuoteForm from '../components/QuoteForm'
 import AnimateIn from '../components/AnimateIn'
+import ConfirmModal from '../components/ConfirmModal'
+import { submitWeb3Form } from '../utils/web3forms'
 import { company } from '../data/siteData'
 import { contactPageHero } from '../data/images/contact'
 import { PhoneIcon, MailIcon } from '../components/Icons'
@@ -10,10 +12,57 @@ import { PhoneIcon, MailIcon } from '../components/Icons'
 export default function ContactPage() {
   const { openCallback } = useOutletContext() || {}
   const [contactSent, setContactSent] = useState(false)
+  const [pendingContact, setPendingContact] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submissionError, setSubmissionError] = useState('')
 
   function handleContactSubmit(e) {
     e.preventDefault()
-    setContactSent(true)
+    const formData = new FormData(e.target)
+    const name = formData.get('name')?.toString().trim() ?? ''
+    const email = formData.get('email')?.toString().trim() ?? ''
+    const phone = formData.get('phone')?.toString().trim() ?? ''
+    const subject = formData.get('subject')?.toString().trim() ?? 'Contact enquiry'
+    const message = formData.get('message')?.toString().trim() ?? ''
+
+    setPendingContact({ name, email, phone, subject, message })
+  }
+
+  async function handleConfirmContact() {
+    if (!pendingContact) return
+
+    setIsSubmitting(true)
+    setSubmissionError('')
+
+    const { name, email, phone, subject, message } = pendingContact
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      '',
+      'Message:',
+      message,
+    ].join('\n')
+
+    try {
+      await submitWeb3Form({
+        name,
+        email,
+        subject: `[Contact] ${subject}`,
+        message: body,
+        data: { phone, form_type: 'contact' },
+      })
+      setContactSent(true)
+      setPendingContact(null)
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : 'Failed to submit. Please try again later.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  function handleCancelContact() {
+    setPendingContact(null)
   }
 
   return (
@@ -83,38 +132,51 @@ export default function ContactPage() {
                 <p>We&apos;ll get back to you as soon as possible.</p>
               </div>
             ) : (
-              <form className="contact-form-card" onSubmit={handleContactSubmit}>
-                <input type="text" name="website" className="hp-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-                <div className="quote-form__grid">
-                  <div className="form-group">
-                    <label htmlFor="cf-name">Full Name *</label>
-                    <input id="cf-name" name="name" type="text" required placeholder="Your name" />
+              <>
+                <form className="contact-form-card" onSubmit={handleContactSubmit}>
+                  <input type="text" name="website" className="hp-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+                  <div className="quote-form__grid">
+                    <div className="form-group">
+                      <label htmlFor="cf-name">Full Name *</label>
+                      <input id="cf-name" name="name" type="text" required placeholder="Your name" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="cf-email">Email *</label>
+                      <input id="cf-email" name="email" type="email" required placeholder="you@example.com" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="cf-phone">Phone Number</label>
+                      <input id="cf-phone" name="phone" type="tel" placeholder="+256 700 000 000" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="cf-subject">Subject *</label>
+                      <input id="cf-subject" name="subject" type="text" required placeholder="How can we help?" />
+                    </div>
+                    <div className="form-group form-group--full">
+                      <label htmlFor="cf-message">Message *</label>
+                      <textarea id="cf-message" name="message" rows={5} required placeholder="Write your message here..." />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="cf-email">Email *</label>
-                    <input id="cf-email" name="email" type="email" required placeholder="you@example.com" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="cf-phone">Phone Number</label>
-                    <input id="cf-phone" name="phone" type="tel" placeholder="+256 700 000 000" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="cf-subject">Subject *</label>
-                    <input id="cf-subject" name="subject" type="text" required placeholder="How can we help?" />
-                  </div>
-                  <div className="form-group form-group--full">
-                    <label htmlFor="cf-message">Message *</label>
-                    <textarea id="cf-message" name="message" rows={5} required placeholder="Write your message here..." />
-                  </div>
-                </div>
-                <button type="submit" className="btn btn--primary">
-                  Send Message
-                </button>
-              </form>
+                  <button type="submit" className="btn btn--primary">
+                    Send Message
+                  </button>
+                  {submissionError && <p className="form-note form-note--error">{submissionError}</p>}
+                </form>
+              </>
             )}
           </AnimateIn>
         </div>
       </AnimateIn>
+      <ConfirmModal
+        isOpen={Boolean(pendingContact)}
+        title="Confirm send message"
+        message={`You are about to send this message to ${company.email} using Web3Forms. Continue?`}
+        onConfirm={handleConfirmContact}
+        onCancel={handleCancelContact}
+        confirmText="Send Message"
+        cancelText="Cancel"
+        isSubmitting={isSubmitting}
+      />
     </>
   )
 }

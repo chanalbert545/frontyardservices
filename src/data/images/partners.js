@@ -2,8 +2,8 @@
 // PARTNER CARD IMAGES — edit import per partner (id must match siteData.js)
 // -----------------------------------------------------------------------------
 import partnerCafeDamour from '../../assets/IMG/IMG_2028.webp'
-import partnerKiraMotors from '../../assets/IMG/IMG_5552.webp'
-import partnerCorporateOffices from '../../assets/IMG/IMG_2045.webp'
+import partnerKiraMotors from '../../assets/IMG/w (4).webp'
+import partnerCorporateOffices from '../../assets/IMG/w (7).webp'
 import partnerPride from '../../assets/pride.png'
 import partnerStoneridgeSchool from '../../assets/stone.png'
 import partnerHealthcare from '../../assets/IMG/IMG_5573.webp'

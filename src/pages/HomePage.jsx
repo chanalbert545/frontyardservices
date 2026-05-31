@@ -8,7 +8,7 @@ import {
   experienceBlurb,
   satisfactionHighlight,
 } from '../data/siteData'
-import { heroImage, aboutImage, homeServicePreview } from '../data/images/home'
+import { heroImage, aboutImage, homeServicePreview, homePartners } from '../data/images/home'
 import LazyImage from '../components/LazyImage'
 import AnimateIn from '../components/AnimateIn'
 import Stagger from '../components/Stagger'
@@ -122,6 +122,29 @@ export default function HomePage() {
               View All Services
             </Link>
           </AnimateIn>
+        </div>
+      </AnimateIn>
+
+      <AnimateIn as="section" className="section section--alt">
+        <div className="container">
+          <AnimateIn>
+            <span className="section__label">Our Partners</span>
+            <h2 className="section__title">Trusted by Leading Businesses</h2>
+            <p className="section__subtitle">We're proud to serve businesses and institutions that share our commitment to excellence.</p>
+          </AnimateIn>
+          <Stagger className="grid-4" step={55}>
+            {homePartners.map((partner) => (
+              <div key={partner.id} className="partner-card">
+                <div className="partner-card__image">
+                  <LazyImage src={partner.image} alt={partner.name} />
+                </div>
+                <div className="partner-card__body">
+                  <h3>{partner.name}</h3>
+                  <p>{partner.description}</p>
+                </div>
+              </div>
+            ))}
+          </Stagger>
         </div>
       </AnimateIn>
 
